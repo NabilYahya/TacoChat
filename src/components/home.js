@@ -12,6 +12,19 @@ export const Home = () => {
   const [name, setName] = useState("");
   const navigate = useNavigate();
   /********************************************************** */
+  // ********************* Handle Key Sound Functions *********************
+  function handleKeyPress(event) {
+    if (event.key === "Backspace") {
+      const backspaceSound = new Audio(typing2);
+      backspaceSound.play();
+    }
+  }
+  function playKeypressSound() {
+    const audio = new Audio(typing);
+    setTimeout(() => {
+      audio.play();
+    }, 100); // adjust the delay time as needed for smoother sound
+  }
   const handleKeyDown = () => {
     setIsTyping(true);
   };
@@ -22,13 +35,6 @@ export const Home = () => {
 
   useEffect(() => {
     const typingSound = document.getElementById("typing-sound");
-
-    function handleKeyPress(event) {
-      if (event.key === "Backspace") {
-        const backspaceSound = new Audio(typing2);
-        backspaceSound.play();
-      }
-    }
 
     if (isTyping) {
       typingSound.currentTime = 0;
@@ -42,13 +48,7 @@ export const Home = () => {
     };
   }, [isTyping]);
 
-  function playKeypressSound() {
-    const audio = new Audio(typing);
-    setTimeout(() => {
-      audio.play();
-    }, 100); // adjust the delay time as needed for smoother sound
-  }
-  /******************************************************************************* */
+  /********************************* BackGound Sound Effect function ********************************************** */
   useEffect(() => {
     const backgroundMusic = document.getElementById("background-music");
     backgroundMusic.play();
@@ -126,6 +126,7 @@ export const Home = () => {
           <motion.input
             type="text"
             value={name}
+            dir="auto"
             style={{
               borderRadius: "7px",
               border: "none",
